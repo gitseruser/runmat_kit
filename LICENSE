@@ -1,4 +1,9 @@
-                    GNU GENERAL PUBLIC LICENSE
+Part of this project based on repo:runmat-org/runmat.
+I rewrite some sources of WASM file with AI and i'm not sure which license should applyed for them.
+repo:runmat-org/runmat is under Apache License 2.0. 
+So i put here only compiled WASM. For other files you should use below license.
+
+                      GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
