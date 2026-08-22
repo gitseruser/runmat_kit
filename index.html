@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RunMat Web</title>
+    <link rel="icon" href="data:," />
+    <script type="module" crossorigin src="./assets/index.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/runmat-wasm.js">
+    <link rel="modulepreload" crossorigin href="./assets/editor-lib.js">
+    <link rel="stylesheet" crossorigin href="./assets/index.css">
+  </head>
+  <body>
+    <div id="app">
+      <header id="toolbar">
+        <span class="brand">RunMat Web</span>
+        <button id="btn-run" class="primary">Run</button>
+        <button id="btn-step" class="toolbar-toggle" title="Пошаговый режим (вкл/выкл)">Пошагово</button>
+        <select id="step-engine" class="toolbar-select" title="Движок пошагового режима: UI — верхнеуровневые операторы; Native — шаг внутри циклов (требует новой сборки wasm)">
+          <option value="ui" selected>UI</option>
+          <option value="native">Native</option>
+        </select>
+        <button id="btn-step-next" title="Выполнить следующий оператор" disabled>Шаг</button>
+        <button id="btn-step-continue" title="Выполнить оставшиеся операторы" disabled>Продолжить</button>
+        <button id="btn-step-stop" title="Остановить пошаговый режим" disabled>Стоп</button>
+        <button id="btn-clear">Clear workspace</button>
+        <span class="sep"></span>
+        <button id="btn-new">New file</button>
+        <button id="btn-save">Save</button>
+        <button id="btn-open-folder">Open folder…</button>
+        <button id="btn-import">Import file…</button>
+        <button id="btn-export">Export</button>
+        <span class="sep"></span>
+        <button id="btn-toggle-console" class="pane-toggle on" title="Показать/скрыть консоль">Console</button>
+        <button id="btn-toggle-plots" class="pane-toggle on" title="Показать/скрыть графики">Plots</button>
+        <select id="theme-select" class="toolbar-select" title="Схема подсветки кода">
+          <option value="light" selected>Light</option>
+          <option value="monokai">Monokai</option>
+        </select>
+        <span class="spacer"></span>
+        <span id="gpu-status" class="status-chip">GPU: …</span>
+        <label id="jit-wrap" class="status-toggle" title="JIT-компиляция (требует перезапуска сессии)">
+          <input type="checkbox" id="jit-toggle" disabled /> JIT
+        </label>
+        <span id="busy-indicator" class="status-chip hidden">running…</span>
+      </header>
+      <aside id="files-panel">
+        <div class="panel-title">Project</div>
+        <div id="files-tree"></div>
+      </aside>
+      <main id="center-pane">
+        <div id="editor-wrap">
+          <div id="editor-tabbar">
+            <span id="editor-filename">untitled.m</span>
+            <span id="editor-cursor"></span>
+          </div>
+          <div id="editor-container"></div>
+        </div>
+        <div id="bottom-pane">
+          <div id="console-heading" class="pane-heading">Console</div>
+          <div id="console-container"></div>
+        </div>
+      </main>
+      <div id="resize-handle"></div>
+      <aside id="vars-panel">
+        <div id="vars-section">
+          <div class="panel-title">Variables</div>
+          <table id="vars-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Shape</th>
+                <th>Res</th>
+              </tr>
+            </thead>
+            <tbody id="vars-body"></tbody>
+          </table>
+          <div id="vars-detail" class="hidden">
+            <div class="panel-title">Value <button id="vars-detail-close">✕</button></div>
+            <pre id="vars-detail-text"></pre>
+          </div>
+        </div>
+        <div id="plots-section">
+          <div class="panel-title">Plots</div>
+          <div id="plots-container"></div>
+        </div>
+      </aside>
+    </div>
+  </body>
+</html>
